@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name"> Sport Shop </string>
+    <string name="type">Type:</string>
+    <string name="size">Size:</string>
+    <string name="description">Description:</string>
+    <string name="color">Color:</string>
+    <string name="btnBack">Back</string>
+    <string name="btnShoppingCart">Add to Shopping Cart</string>
+
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="header" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#4682B4</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BoldStyle" parent="@android:style/TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18dp</item>
+
+    </style>
+
+
+
+
+
+</resources>
