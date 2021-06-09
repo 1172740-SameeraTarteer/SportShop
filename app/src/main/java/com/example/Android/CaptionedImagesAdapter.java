@@ -22,10 +22,10 @@ public class CaptionedImagesAdapter
 
     private String[] captions;
     private int[] imageIds;
-    private String[] pricearr;
+    private int[] pricearr;
     private String[] ratingarr;
 
-    public CaptionedImagesAdapter(String[] captions, int[] imageIds, String[] pricearr, String[] ratingarr) {
+    public CaptionedImagesAdapter(String[] captions, int[] imageIds, int[] pricearr, String[] ratingarr) {
         this.captions = captions;
         this.imageIds = imageIds;
         this.pricearr = pricearr;
@@ -53,7 +53,7 @@ public class CaptionedImagesAdapter
         TextView price = (TextView)cardView.findViewById(R.id.txtPrice);
         price.setText("Price: "+pricearr[position]);
         TextView rating = (TextView)cardView.findViewById(R.id.txtRating);
-        rating.setText("Rating: " +ratingarr[position]);
+        rating.setText(ratingarr[position]);
         cardView.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){

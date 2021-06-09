@@ -7,5 +7,8 @@
     <string name="color">Color:</string>
     <string name="btnBack">Back</string>
     <string name="btnShoppingCart">Add to Shopping Cart</string>
+    <string name="ShowItems">Show Items</string>
+    <string name="ShoppingList">Shopping List</string>
+
 
 </resources>

@@ -5,21 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="586dp"
-        android:src="@drawable/background" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_gravity="center"
-        android:text="@string/ShowItems"
-        android:onClick="btnShowItems"
-        />
+    <androidx.recyclerview.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/item_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
 
 
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
