@@ -24,14 +24,19 @@ public class CaptionedImagesAdapter
     private int[] imageIds;
     private int[] pricearr;
     private String[] ratingarr;
+    private int[] ids;
+    private String[] color;
+    private String[] size;
 
-    public CaptionedImagesAdapter(String[] captions, int[] imageIds, int[] pricearr, String[] ratingarr) {
+
+    public CaptionedImagesAdapter(String[] captions, int[] imageIds, int[] pricearr, String[] ratingarr,int [] ids) {
         this.captions = captions;
         this.imageIds = imageIds;
         this.pricearr = pricearr;
         this.ratingarr = ratingarr;
-    }
+        this.ids = ids;
 
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,7 +56,7 @@ public class CaptionedImagesAdapter
         TextView txt = (TextView)cardView.findViewById(R.id.txtName);
         txt.setText(captions[position]);
         TextView price = (TextView)cardView.findViewById(R.id.txtPrice);
-        price.setText("Price: "+pricearr[position]);
+        price.setText("Price: "+pricearr[position] + "$");
         TextView rating = (TextView)cardView.findViewById(R.id.txtRating);
         rating.setText(ratingarr[position]);
         cardView.setOnClickListener( new View.OnClickListener(){
@@ -61,7 +66,7 @@ public class CaptionedImagesAdapter
                         MainActivity2.class);
 
 
-                intent.putExtra("item_id", position);
+                intent.putExtra("item_id", ids[position]);
                 v.getContext().startActivity(intent);
 
 

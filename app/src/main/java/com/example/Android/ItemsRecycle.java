@@ -20,18 +20,22 @@ public class ItemsRecycle extends AppCompatActivity {
         RecyclerView recycler = (RecyclerView)findViewById(R.id.item_recycler);
 
         String[] captions = new String[Items.Items.length];
-        int[] ids = new int[Items.Items.length];
+        int[] imageIDs = new int[Items.Items.length];
         int[] price = new int[Items.Items.length];
         String[] rating = new String[Items.Items.length];
+        int[] ids = new int[Items.Items.length];
 
         for(int i = 0; i<captions.length;i++){
+
             captions[i] = Items.Items[i].getName();
             price[i] = Items.Items[i].getPrice();
             rating[i] = Items.Items[i].getRating();
-            ids[i] = Items.Items[i].getImageID();
+            imageIDs[i] = Items.Items[i].getImageID();
+            ids[i] = Items.Items[i].getId();
+
         }
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        CaptionedImagesAdapter adapter = new CaptionedImagesAdapter(captions, ids,price,rating);
+        CaptionedImagesAdapter adapter = new CaptionedImagesAdapter(captions, imageIDs,price,rating,ids);
         recycler.setAdapter(adapter);
     }
     @Override

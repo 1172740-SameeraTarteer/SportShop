@@ -2,11 +2,9 @@ package com.example.Android;
 
 import android.content.Intent;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +23,10 @@ public class MainActivity2 extends AppCompatActivity {
     Items items;
     String selectedColor = null;
     String selectedSize = null;
-    int selectedId;
+    int selectedIdSize,selectedIdColor;
+     RadioGroup rgColor , rgSize;
+
+   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = getIntent();
          id = (int)intent.getExtras().get("item_id");
 
-         items = Items.Items[id];
+         items = Items.findItemsByid(id);
 
         TextView type= findViewById(R.id.edtType);
         TextView name= findViewById(R.id.edtName);
@@ -72,61 +73,37 @@ public class MainActivity2 extends AppCompatActivity {
     public void addRadioButtons() {
         colorList = items.getColor().split(",");
         sizeList = items.getSize().split(",");
-        final RadioGroup rgColor, rgSize;
 
 
-        rgColor = findViewById(R.id.rGColor);
-        ArrayList<RadioButton> listRadioButtonC = new ArrayList<>();
-        rgColor.setOrientation(RadioGroup.HORIZONTAL);// or RadioGroup.VERTICAL
-        for (int i = 0; i < colorList.length; i++) {
-            RadioButton rb = new RadioButton(this);
-            rb.setId(i);
-            rb.setText(colorList[i] + "");
-            listRadioButtonC.add(rb);
-            rgColor.addView(listRadioButtonC.get(i));
-        }
-        rgSize = findViewById(R.id.rGSize);
-        ArrayList<RadioButton> listRadioButtonS = new ArrayList<>();
-        rgColor.setOrientation(RadioGroup.HORIZONTAL);// or RadioGroup.VERTICAL
-        for (int i = 0; i < sizeList.length; i++) {
-            RadioButton rb = new RadioButton(this);
-            rb.setText(sizeList[i] + "");
-            rb.setId(i);
-            listRadioButtonS.add(rb);
-            rgSize.addView(listRadioButtonS.get(i));
-        }
 
-
-        rgColor.setOnCheckedChangeListener((rGroup, checkedId) -> {
-
-            int radioButtonID = rgColor.getCheckedRadioButtonId();
-            View radioButton = rgColor.findViewById(radioButtonID);
-            int idx = rgColor.indexOfChild(radioButton);
-            RadioButton r = (RadioButton) rgColor.getChildAt(idx);
-            selectedColor = r.getText().toString();
-        });
-        rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(RadioGroup rGroup, int checkedId) {
-
-                int radioButtonID = rgSize.getCheckedRadioButtonId();
-                View radioButton = rgSize.findViewById(radioButtonID);
-                int idx = rgSize.indexOfChild(radioButton);
-                RadioButton r = (RadioButton) rgSize.getChildAt(idx);
-                selectedSize = r.getText().toString();
+            rgColor = findViewById(R.id.rGColor);
+            ArrayList<RadioButton> listRadioButtonC = new ArrayList<>();
+            rgColor.setOrientation(RadioGroup.HORIZONTAL);// or RadioGroup.VERTICAL
+            for (int i = 0; i < colorList.length; i++) {
+                RadioButton rb = new RadioButton(this);
+                rb.setId(i);
+                rb.setText(colorList[i] + "");
+                listRadioButtonC.add(rb);
+                rgColor.addView(listRadioButtonC.get(i));
             }
-        });
-         selectedId = rgSize.getCheckedRadioButtonId();
+            rgSize = findViewById(R.id.rGSize);
+            ArrayList<RadioButton> listRadioButtonS = new ArrayList<>();
+            rgColor.setOrientation(RadioGroup.HORIZONTAL);// or RadioGroup.VERTICAL
+            for (int i = 0; i < sizeList.length; i++) {
+                RadioButton rb = new RadioButton(this);
+                rb.setText(sizeList[i] + "");
+                rb.setId(i);
+                listRadioButtonS.add(rb);
+                rgSize.addView(listRadioButtonS.get(i));
+            }
 
-//        selectItem(selectedId,selectedColor, selectedSize);
 
     }
 
-    public void selectItem(int selectedId,String selectedColor,String selectedSize){
+    public void selectItem(String selectedColor,String selectedSize){
                     Intent intent = new Intent(this,
                     ShoppingList.class);
-        intent.putExtra("selectedId",selectedId);
+        intent.putExtra("item_id",id);
         intent.putExtra("color",selectedColor);
         intent.putExtra("size", selectedSize);
         startActivity(intent);
@@ -145,13 +122,22 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
-    public void btnShopCart(View view){
-//        Intent intent = new Intent(view.getContext(),
-//                ShoppingList.class);
-//        view.getContext().startActivity(intent);
+    public void btnShopCart(View view) {
+        if (rgColor.getCheckedRadioButtonId() != -1 && rgSize.getCheckedRadioButtonId() != -1) {
 
+
+            selectedIdSize = rgSize.getCheckedRadioButtonId();
+            RadioButton radioButton = findViewById(selectedIdSize);
+            selectedIdColor = rgColor.getCheckedRadioButtonId();
+
+            RadioButton radioButtonC = findViewById(selectedIdColor);
+            String selectedColor = (String) radioButton.getText();
+            String selectedSize = (String) radioButtonC.getText();
+
+            selectItem(selectedColor, selectedSize);
+
+        }
     }
-
 }
 
 

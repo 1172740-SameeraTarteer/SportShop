@@ -40,6 +40,15 @@ private String size;
 
 
     };
+    public static Items findItemsByid(int id){
+        for (int i = 0;i<Items.length;i++){
+            if(Items[i].getId() == id){
+                return Items[i];
+            }
+        }
+        return null;
+
+    }
 
 
     public Items(int id, String name, String size, String type, String description, String color, int price, String rating, int imageID) {
@@ -55,12 +64,13 @@ private String size;
 
     }
 
-    public Items(int id, String name, String color, int price, int imageID) {
+    public Items(int id, String name, String color, int price, int imageID,String size) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.price = price;
         this.imageID = imageID;
+        this.size = size;
     }
 
     public int getId() {
@@ -136,6 +146,21 @@ private String size;
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    @Override
+    public String toString() {
+        return "Items{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", size='" + size + '\'' +
+                ", rating='" + rating + '\'' +
+                ", imageID=" + imageID +
+                '}';
     }
 }
 
